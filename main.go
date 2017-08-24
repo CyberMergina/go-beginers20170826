@@ -14,11 +14,24 @@ type templateHandler struct {
 	templ *template.Template
 }
 
+type Product struct {
+	Name	string
+}
+
+type Data struct {
+	Products	[]*Product
+}
+
 func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	t.once.Do(func(){
 		t.templ = template.Must(template.ParseFiles(filepath.Join("templates", t.filename)))
 	})
-	t.templ.Execute(w, r)
+	p1 := Product{Name:"りんご"}
+	p2 := Product{Name:"なし"}
+	p3 := Product{Name:"ばなな"}
+	d := Data{ Products: []*Product{&p1, &p2, &p3} }
+	t.templ.Execute(w, d)
+
 }
 
 func main() {
