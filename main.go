@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/labstack/gommon/log"
+	"log"
 )
 
 func main() {
