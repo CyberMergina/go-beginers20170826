@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+	"github.com/labstack/gommon/log"
+)
 
 func main() {
-	fmt.Println("Hello, world")
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
+		w.Write([]byte(`Hello, World`))
+	})
+	if err:=http.ListenAndServe(":8080", nil); err!= nil {
+		log.Fatal("ListenAndServe",err)
+	}
 }
